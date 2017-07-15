@@ -1,9 +1,7 @@
 
 import crypto from 'crypto';
 import bip39 from 'bip39';
-import buffer from 'buffer';
 import util from 'ethereumjs-util';
-// import lightwallet from 'eth-lightwallet'; // doesn't work =(
 import hdkey from 'ethereumjs-wallet/hdkey';
 import EthereumTx from 'ethereumjs-tx';
 
@@ -13,7 +11,7 @@ const WalletService = {};
 
 WalletService.generateNewWallet = () => {
   console.log("[WalletService.generateNewWallet]");
-  const randomBytes = crypto.randomBytes(16);
+  /*const randomBytes = crypto.randomBytes(16);
   const mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'));
   const seed = bip39.mnemonicToSeed(mnemonic);
   const ethKey = hdkey.fromMasterSeed(seed);
@@ -23,7 +21,15 @@ WalletService.generateNewWallet = () => {
   return {
     mnemonic: mnemonic,
     privateKey: wallet.getPrivateKey(),
-    publicKey: publicKey.substr(2), // is necessary?
+    publicKey: publicKey,
+    address: address
+  }*/
+  // Wallet hardcoded 
+  const address = util.bufferToHex(util.publicToAddress('0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b'));
+  return {
+    mnemonic: "corn buzz endorse wagon pitch seek shield tongue kind measure fun use",
+    privateKey: "0x424525f3f6def569df3d97b0d06238e776f2670c853f32c5c029c1622403b8f2",
+    publicKey: "0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b",
     address: address
   }
 };
@@ -35,7 +41,8 @@ WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
     console.log("[WalletService.send] raw_tx", raw_tx);
     const tx = new EthereumTx(Buffer.from(util.stripHexPrefix(raw_tx), 'hex'));
     tx.sign(Buffer.from(util.stripHexPrefix(privateKey), 'hex'));
-    const signedTx = tx.serialize();
+    let signedTx = tx.serialize();
+    signedTx = util.bufferToHex(signedTx);
     console.log("[WalletService.send] signedTx", signedTx);
     return API.contract.pushTx(signedTx);
   })
