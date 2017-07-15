@@ -30,7 +30,7 @@ App = () => {
   const wallet = WalletService.generateNewWallet();
   console.log("wallet info:", wallet); 
   const toAddress = "0x00c376412f3a8063fc6bceb1d874730ea88eb531";
-  const amount = 50;
+  const amount = 11;
   WalletService.send({privateKey: wallet.privateKey, fromAddress: wallet.address}, toAddress, amount);
   return (
     <View style={styles.container}>
