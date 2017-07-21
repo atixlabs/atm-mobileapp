@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   TextInput,
+  TouchableNativeFeedback,
 } from 'react-native';
 import Constants from '../components/Constants';
 
@@ -31,14 +32,23 @@ export default class HomeScreen extends React.Component {
           <View style={styles.input}>
             <TextInput
               style={styles.textInput}
-              placeholder="Type here to translate!"
+              placeholder="Input the amount"
+              keyboardType="numeric"
+              autoCorrect={false}
+              value={this.props.inputText}
               onChangeText={(inputText) => this.setState({inputText})}
             />
+            <View style={{ flex: 1 }}/>
+            <TouchableNativeFeedback>
+              <View style={styles.buttonInput}>
+                <Text>
+                  Accept
+                </Text>
+              </View>
+            </TouchableNativeFeedback>
           </View>
         </View>
-        <View style={styles.thirdRow}>
-          <Text>Welcome to humanATM app</Text>
-        </View>
+        <View style={styles.thirdRow} />
       </View>
     );
   }
@@ -73,6 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
   },
   input: {
+    flexDirection: 'row',
     width: Constants.realWidth * (9 / 10),
     justifyContent: 'center',
     alignContent: 'space-between',
@@ -83,6 +94,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
   },
   buttonInput: {
+    justifyContent: 'center',
+    alignItems: 'center',
     width: Constants.realWidth * (3 / 10),
+    backgroundColor: 'green',
   }
 });
