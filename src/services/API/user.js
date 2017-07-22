@@ -29,4 +29,4 @@ userAPI.getUserData = (userId) => {
   }).then(response => forTesting);
 };
 
-export default userAPI
+export default userAPI;
