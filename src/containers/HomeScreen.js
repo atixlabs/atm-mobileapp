@@ -10,6 +10,7 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import MoneyRequestScreen from './MoneyRequestScreen';
 import Loading from '../components/Loading';
 import API from '../services/API/API';
+import List from '../components/List'
 
 import Constants from '../components/Constants';
 
@@ -47,10 +48,10 @@ export default class HomeScreen extends React.Component {
             renderTabBar={() => <DefaultTabBar />}
             tabBarPosition='bottom'
           >
-            <MoneyRequestScreen tabLabel="Request Label" />
-            {/*
-              Add ListScreen
-            */}
+            <MoneyRequestScreen tabLabel="Request" />
+            <List tabLabel="List" data={[{_id: "1", requestedAmount: 1000, "transactionData": {"state": "Pending"}},
+              {_id: "2", requestedAmount: 500, "transactionData": {"state": "Canceled"}},
+              {_id: "3", requestedAmount: 250, "transactionData": {"state": "Confirmed"}}]}/>
           </ScrollableTabView>
         ) : (
           <Loading />
