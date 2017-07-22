@@ -67,7 +67,7 @@ export default class MoneyRequestScreen extends React.Component {
                   flex: 1,
                   resizeMode: 'contain',
                 }}
-                source={require('../images/HUMAN_ATMalta.png')}
+                source={require('../images/humanATM_png.png')}
               />
             </View>
             <View style={styles.secondRow}>
@@ -104,46 +104,39 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center'
   },
   firstRow: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: (Constants.realHeight - Constants.tabviewHeight) / 3,
-    backgroundColor: 'green',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
   },
   secondRow: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: (Constants.realHeight - Constants.tabviewHeight) / 3,
-    backgroundColor: 'yellow',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
   },
   thirdRow: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: (Constants.realHeight - Constants.tabviewHeight) / 3,
-    backgroundColor: 'pink',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
   },
   input: {
     width: Constants.realWidth * (9 / 10),
     justifyContent: 'center',
-    alignContent: 'space-between',
-    backgroundColor: 'orange',
+    alignContent: 'space-between'
   },
   textInput: {
     height: Constants.realHeight / 12,
-    backgroundColor: 'blue',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   buttonInput: {
     width: Constants.realWidth * (9 / 10),
     height: Constants.realHeight / 12,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'green',
+    alignItems: 'center'
   }
 });
