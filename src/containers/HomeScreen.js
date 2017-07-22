@@ -4,6 +4,15 @@ import {
   View,
 } from 'react-native';
 import OneSignal from 'react-native-onesignal';
+import API from '../services/API/API';
+
+// JUST FOR TESTING
+// DELETE ME
+const user = {};
+user.getAddress = () => {
+  return 'dasjdklsajdlkas';
+};
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -21,6 +30,19 @@ export default class HomeScreen extends React.Component {
 
   onIds(device) {
     console.log('Device info: ', device);
+    const userAddress = user.getAddress();
+    API.oneSignal.sendDeviceId({
+      userAddress,
+      deviceId: device.userId,
+      username: 'atix',
+      password: 'atixlabs'
+    })
+    .then((response) => {
+      console.log('Device id saved', response);
+    })
+    .catch((error) => {
+      console.log('Device id error', error);
+    });
   }
 
   render() {
