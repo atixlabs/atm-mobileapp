@@ -18,11 +18,11 @@ renderSeparator = () => {
 }
 
 goToContactInfo = () => {
-    console.log("Ir a info de contacto");
+    // TODO go to contact info
 }
 
 cancelTransaction = () => {
-    console.log("Cancelar transaccion");
+    // TODO cancel transaction
 }
 
 List = (props) => {
@@ -33,10 +33,10 @@ List = (props) => {
                     <Text style={styles.listItem}>$ {item.requestedAmount} - {item.transactionData.state}</Text>
                     <View style={{flex: 1}}/>
                     <View style={{flexDirection: 'row'}}>
-                        <Button style={styles.listButton} small backgroundColor="#a5cf35" onclick={this.goToContactInfo}>
+                        <Button style={styles.listButton} small backgroundColor="#a5cf35" onPress={this.goToContactInfo}>
                             <Icon name='list'/>
                         </Button>
-                        <Button style={styles.listButton} small backgroundColor="#c44b4b" onclick={this.cancelTransaction}>
+                        <Button style={styles.listButton} small backgroundColor="#c44b4b" onPress={this.cancelTransaction}>
                             <Icon name='close'/>
                         </Button>
                     </View>
