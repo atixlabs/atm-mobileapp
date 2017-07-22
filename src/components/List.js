@@ -3,31 +3,45 @@ import {
   FlatList,
   Text,
   View,
-  StyleSheet,
-  Button
+  StyleSheet
 } from 'react-native';
 import PropTypes from 'prop-types';
+import {
+    Button,
+    Icon
+} from 'native-base';
 
-export default class List extends React.Component {
-    
-    keyExtractor = (item, index) => item._id;
+keyExtractor = (item, index) => item._id;
 
-    constructor(props) {
-        super(props);
-        this.data = props.data;
-    }
+renderSeparator = () => {
+    return <View style={{height: 1, backgroundColor: "#CED0CE"}}/>;
+}
 
-    render() {
-        return (
-            <FlatList data={this.data} keyExtractor={this.keyExtractor}
-                renderItem={({item}) =>
-                    <View style={styles.list}>
-                        <Text style={styles.listItem}>$ {item.requestedAmount} - {item.transactionData.state}</Text>
-                        <Button title="Info" style={styles.listButton} color="#a5cf35"/>
-                        <Button title="Cancel" style={styles.listButton} color="#c44b4b"/>
-                    </View>}/>
-        );
-    }
+goToContactInfo = () => {
+    console.log("Ir a info de contacto");
+}
+
+cancelTransaction = () => {
+    console.log("Cancelar transaccion");
+}
+
+List = (props) => {
+    return (
+        <FlatList data={props.data} keyExtractor={this.keyExtractor} ItemSeparatorComponent={this.renderSeparator}
+            renderItem={({item}) =>
+                <View style={styles.list}>
+                    <Text style={styles.listItem}>$ {item.requestedAmount} - {item.transactionData.state}</Text>
+                    <View style={{flex: 1}}/>
+                    <View style={{flexDirection: 'row'}}>
+                        <Button style={styles.listButton} small backgroundColor="#a5cf35" onclick={this.goToContactInfo}>
+                            <Icon name='list'/>
+                        </Button>
+                        <Button style={styles.listButton} small backgroundColor="#c44b4b" onclick={this.cancelTransaction}>
+                            <Icon name='close'/>
+                        </Button>
+                    </View>
+                </View>}/>
+    );    
 }
 
 List.propTypes = {
@@ -36,16 +50,20 @@ List.propTypes = {
 
 const styles = StyleSheet.create({
     list: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        margin: 10
+        margin: 5
     },
     listItem: {
         marginRight: 15,
         marginLeft: 15
     },
     listButton: {
-        marginRight: 20,
-        marginLeft: 20
+        alignContent: 'space-around',
+        marginRight: 5,
+        marginLeft: 5
     }
 });
+
+export default List;
