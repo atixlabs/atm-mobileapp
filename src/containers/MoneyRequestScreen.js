@@ -56,6 +56,24 @@ export default class MoneyRequestScreen extends React.Component {
     this.setState({ inputText });
   }
 
+  onPress(amount) {
+    API.user.postNewRequest('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr', this.state.inputText)
+    .then((resp) => {
+      console.log('resp', resp);
+      this.setState({
+        inputText: '',
+        user: {
+          appData: {
+            maxAllowedWithdrawal: this.state.user.appData.maxAllowedWithdrawal - this.state.inputText,
+          }
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('login error', error);
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -80,11 +98,12 @@ export default class MoneyRequestScreen extends React.Component {
                   value={this.state.inputText}
                   onChangeText={(input) => this.verifyAmount(input)}
                 />
+                <Text style={{ textAlign: 'center' }}>Total amount to extract: ${this.state.user.appData.maxAllowedWithdrawal}</Text>
               </View>
             </View>
             <View style={styles.thirdRow}>
               <View style={styles.input}>
-                <Button success={true} style={styles.buttonInput}>
+                <Button onPress={() => this.onPress()} success={true} style={styles.buttonInput}>
                   <Text>
                     Request
                   </Text>
@@ -127,7 +146,7 @@ const styles = StyleSheet.create({
   input: {
     width: Constants.realWidth * (9 / 10),
     justifyContent: 'center',
-    alignContent: 'space-between'
+    alignContent: 'center',
   },
   textInput: {
     height: Constants.realHeight / 12,
