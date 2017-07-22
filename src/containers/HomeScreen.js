@@ -9,7 +9,7 @@ import {
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import MoneyRequestScreen from './MoneyRequestScreen';
 import Loading from '../components/Loading';
-import humanatmAPI from '../API/API';
+import API from '../services/API/API';
 
 import Constants from '../components/Constants';
 
@@ -29,7 +29,7 @@ export default class HomeScreen extends React.Component {
 
   componentDidMount() {
     console.log('Loading');
-    humanatmAPI.user.getUserData('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
+    API.user.getUserData('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
     .then((user) => {
       console.log('Loaded');
       this.setState({ user, loadedUser: true });

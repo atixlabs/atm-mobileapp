@@ -1,4 +1,4 @@
-import configAPI from './config_API';
+import configAPI, { handleErrors } from './config';
 
 const userAPI = {};
 
@@ -20,6 +20,7 @@ const forTesting = {
 }
 
 userAPI.getUserData = (userId) => {
+  console.log("[userAPI.getUserData]", userId);
   return fetch(`${configAPI.serverRoute}/user/${userId}`, {
     method: 'GET',
     headers: {
