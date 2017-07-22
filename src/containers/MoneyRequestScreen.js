@@ -83,7 +83,8 @@ export default class MoneyRequestScreen extends React.Component {
               <Image
                 style={{
                   flex: 1,
-                  resizeMode: 'contain',
+                  resizeMode: 'cover',
+                  width: Constants.realWidth * (9 / 10)
                 }}
                 source={require('../images/humanATM_png.png')}
               />

@@ -53,4 +53,4 @@ userAPI.postNewRequest = (userId, amount) => {
 
 }
 
-export default userAPI
+export default userAPI;
