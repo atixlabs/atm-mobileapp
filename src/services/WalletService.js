@@ -11,7 +11,7 @@ const WalletService = {};
 
 WalletService.generateNewWallet = () => {
   console.log("[WalletService.generateNewWallet]");
-  /*const randomBytes = crypto.randomBytes(16);
+  const randomBytes = crypto.randomBytes(16);
   const mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'));
   const seed = bip39.mnemonicToSeed(mnemonic);
   const ethKey = hdkey.fromMasterSeed(seed);
@@ -23,15 +23,15 @@ WalletService.generateNewWallet = () => {
     privateKey: wallet.getPrivateKey(),
     publicKey: publicKey,
     address: address
-  }*/
+  }
   // Wallet hardcoded 
-  const address = util.bufferToHex(util.publicToAddress('0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b'));
+  /*const address = util.bufferToHex(util.publicToAddress('0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b'));
   return {
     mnemonic: "corn buzz endorse wagon pitch seek shield tongue kind measure fun use",
     privateKey: "0x424525f3f6def569df3d97b0d06238e776f2670c853f32c5c029c1622403b8f2",
     publicKey: "0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b",
     address: address
-  }
+  }*/
 };
 
 WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
