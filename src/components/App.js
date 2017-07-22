@@ -6,6 +6,7 @@ import {
   View
 } from 'react-native';
 import WalletService from '../services/WalletService';
+import SessionUser from '../state/SessionUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,12 +27,23 @@ const styles = StyleSheet.create({
   },
 });
 
+const applicationAsyncInit = async function() {
+  try {
+    if (!SessionUser.userIsLoggedIn()){
+      const wallet = WalletService.generateNewWallet();
+      await SessionUser.saveUser(wallet);
+    }
+  } catch(error) {
+    console.log("[App.onApplicationInit] cannot create a new user", error);
+  }
+};
+
 App = () => {
-  const wallet = WalletService.generateNewWallet();
-  console.log("wallet info:", wallet); 
-  const toAddress = "0x00c376412f3a8063fc6bceb1d874730ea88eb531";
+  applicationAsyncInit();
+  /* const toAddress = "0x00c376412f3a8063fc6bceb1d874730ea88eb531";
   const amount = 11;
   WalletService.send({privateKey: wallet.privateKey, fromAddress: wallet.address}, toAddress, amount);
+  */
   return (
     <View style={styles.container}>
       <Text style={styles.welcome}>
