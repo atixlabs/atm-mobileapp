@@ -31,11 +31,13 @@ const SessionUser = {
       });
     } catch(error) {
       console.log('[SessionUser.saveUser] User cannot be saved:', error);
+      throw error;
     };
   },
   loadUser: async function() {
     try {
-      const userInfo = await AsyncStorage.getItem(USER_LOGGED_IN);
+      const userInfoSerialized = await AsyncStorage.getItem(USER_LOGGED_IN);
+      const userInfo = JSON.parse(userInfoSerialized);
       return this.user = Object.create(User.prototype, {
         mnemonic: { value: userInfo.mnemonic },
         privateKey: { value: userInfo.privateKey },
@@ -44,6 +46,7 @@ const SessionUser = {
       });
     } catch (error) {
       console.log('[SessionUser.loadUser] User in session cannot be loaded:', error);
+      throw error;
     }
   },
   // Allways use it after SessionUser.saveUser or SessionUser.loadUserSession

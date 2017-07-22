@@ -10,8 +10,8 @@ oneSignalAPI.sendDeviceId = (userData) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      address: userData.userAddress,
-      oneSignal: userData.deviceId,
+      address: userData.address,
+      oneSignalId: userData.deviceId,
       username: userData.username,
       password: userData.password
     })
