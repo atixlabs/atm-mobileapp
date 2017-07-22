@@ -9,6 +9,9 @@ const Constants = {
 
 	/**Real width of the screen */
 	realWidth: Dimensions.get('window').width,
+
+	/**tab-view height*/
+	tabviewHeight: (Dimensions.get('window').height - StatusBar.currentHeight) / 10,
 }
 
 export default Constants;
