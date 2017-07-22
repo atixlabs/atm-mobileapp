@@ -6,13 +6,6 @@
 import './shim.js';
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import App from './src/components/App';
 
-import HomeScreen from './src/containers/HomeScreen';
-
-const humanAtm = StackNavigator({
-  HomeScreen: { screen: HomeScreen },
-});
-
-
-AppRegistry.registerComponent('humanAtm', () => humanAtm);
+AppRegistry.registerComponent('humanAtm', () => App);
