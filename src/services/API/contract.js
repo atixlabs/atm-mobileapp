@@ -18,7 +18,7 @@ contractAPI.buildTransferTx = (payload) => {
   }).then(handleErrors);
 };
 
-contractAPI.pushTx = (signedTx) => {
+contractAPI.pushTx = (signedTx, buildTxPayload) => {
   console.log("[contractAPI.pushTx]", 
    JSON.stringify({
       signed_tx: signedTx.toString()
@@ -30,7 +30,10 @@ contractAPI.pushTx = (signedTx) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      signed_tx: signedTx.toString()
+      signed_tx: signedTx.toString(),
+      from: buildTxPayload.from,
+      to: buildTxPayload.to,
+      amount: buildTxPayload.amount
     })
   }).then(handleErrors);
 };

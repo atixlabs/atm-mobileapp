@@ -35,7 +35,8 @@ WalletService.generateNewWallet = () => {
 };
 
 WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
-  API.contract.buildTransferTx({from: fromAddress, to: toAddress, amount: amount})
+  const buildTxPayload = {from: fromAddress, to: toAddress, amount: amount};
+  API.contract.buildTransferTx(buildTxPayload)
   .then((response) => response.json())
   .then(({raw_tx}) => {
     console.log("[WalletService.send] raw_tx", raw_tx);
@@ -44,7 +45,7 @@ WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
     let signedTx = tx.serialize();
     signedTx = util.bufferToHex(signedTx);
     console.log("[WalletService.send] signedTx", signedTx);
-    return API.contract.pushTx(signedTx);
+    return API.contract.pushTx(signedTx, buildTxPayload);
   })
   .then((response) => response.json())
   .then((result) => {
