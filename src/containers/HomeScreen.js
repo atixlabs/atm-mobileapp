@@ -11,6 +11,7 @@ import MoneyRequestScreen from './MoneyRequestScreen';
 import Loading from '../components/Loading';
 import OneSignal from 'react-native-onesignal';
 import API from '../services/API/API';
+import List from '../components/List'
 import SessionUser from '../state/SessionUser';
 import WalletService from '../services/WalletService';
 
@@ -28,7 +29,7 @@ const sendDeviceId = function(userData) {
 };
 
 export default class HomeScreen extends React.Component {
-  
+
   static navigationOptions = {
     header: null,
   }
@@ -90,7 +91,6 @@ export default class HomeScreen extends React.Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         {this.state.loadedUser ? (
@@ -98,10 +98,10 @@ export default class HomeScreen extends React.Component {
             renderTabBar={() => <DefaultTabBar />}
             tabBarPosition='bottom'
           >
-            <MoneyRequestScreen tabLabel="Request Label" />
-            {/*
-              Add ListScreen
-            */}
+            <MoneyRequestScreen tabLabel="Request" />
+            <List tabLabel="List" data={[{_id: "1", requestedAmount: 1000, "transactionData": {"state": "Pending"}},
+              {_id: "2", requestedAmount: 500, "transactionData": {"state": "Canceled"}},
+              {_id: "3", requestedAmount: 250, "transactionData": {"state": "Confirmed"}}]}/>
           </ScrollableTabView>
         ) : (
           <Loading />
