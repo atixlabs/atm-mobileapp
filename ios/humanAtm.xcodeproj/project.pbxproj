@@ -487,9 +487,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				037C78939606498CAE38AC9E /* RNRandomBytes.xcodeproj */,
-				6BFD803A8A054A568ECFC0D1 /* RNOS.xcodeproj */,
-				E9FCDE52C21A4D3D8BAECC6C /* TcpSockets.xcodeproj */,
-				CE57E08000A04650B88CF227 /* UdpSockets.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -510,7 +507,6 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* humanAtmTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				ADB586BA90C649D897FF395A /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -526,26 +522,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		ADB586BA90C649D897FF395A /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				BB0A32F6378240208E0CF08A /* Entypo.ttf */,
-				FA0A9BB70CD84BA9AEE8E34A /* EvilIcons.ttf */,
-				4E5AD9996AA94560BBEC1C2A /* FontAwesome.ttf */,
-				26774945E7434FEFA60F7408 /* Foundation.ttf */,
-				7CDECAA9A9E345A4AF57851F /* Ionicons.ttf */,
-				1B2C9B90395A4D4CA793E7FA /* MaterialIcons.ttf */,
-				9C6E323130C64629A4F4BB9F /* Octicons.ttf */,
-				B9F9FF10EBB6465D83F81B4A /* Roboto_medium.ttf */,
-				5E07A2DCC29A4EB8B71680DA /* Roboto.ttf */,
-				3A8C1914B00C49DA9CB8789D /* rubicon-icon-font.ttf */,
-				548BD9F91669472D9DAD5F46 /* SimpleLineIcons.ttf */,
-				4B4F62D1F85043268CF00E53 /* Zocial.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -905,18 +881,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				F610D077EAE6483C89501F10 /* Entypo.ttf in Resources */,
-				5742A056F8F241B9A496C679 /* EvilIcons.ttf in Resources */,
-				917C1DE2F08F4FBCBCF127FD /* FontAwesome.ttf in Resources */,
-				1BF6F148D5F74BB9A9426371 /* Foundation.ttf in Resources */,
-				F114825A0B4D42C2BC292A10 /* Ionicons.ttf in Resources */,
-				028EB4AFBBCA4FAB94BD4741 /* MaterialIcons.ttf in Resources */,
-				85B9E5C62C324B76A43A1DC2 /* Octicons.ttf in Resources */,
-				1D5EF1A437864D858AEAA930 /* Roboto_medium.ttf in Resources */,
-				6F67ACF23B414C168491317C /* Roboto.ttf in Resources */,
-				C08620EF14444E878D926614 /* rubicon-icon-font.ttf in Resources */,
-				60F87DBE808F4625B0901DF1 /* SimpleLineIcons.ttf in Resources */,
-				BDC16B3ABD94419A951FD0B2 /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1051,16 +1015,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Debug;
@@ -1082,16 +1040,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Release;
@@ -1114,9 +1066,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Debug;
@@ -1138,9 +1087,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Release;
@@ -1171,16 +1117,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Debug;
@@ -1211,16 +1151,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-randombytes",
-					"$(SRCROOT)/../node_modules/react-native-os/ios",
-					"$(SRCROOT)/../node_modules/react-native-tcp/ios/**",
-					"$(SRCROOT)/../node_modules/react-native-udp/ios/**",
 				);
 			};
 			name = Release;
@@ -1246,9 +1180,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1273,9 +1204,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};

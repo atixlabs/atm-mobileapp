@@ -2,52 +2,99 @@ import React from 'react';
 import {
   Text,
   View,
+  Image,
   StyleSheet,
   TextInput,
   TouchableNativeFeedback,
 } from 'react-native';
+import {
+  Button,
+} from 'native-base';
+import Loading from '../components/Loading';
+import API from '../services/API/API';
 
 import Constants from '../components/Constants';
+
+let mounted;
 
 export default class MoneyRequestScreen extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
+      loadedUser: false,
+      user: {},
       inputText: '',
     };
+  }
+
+  componentDidMount() {
+    mounted = true;
+    console.log('Loading');
+    API.user.getUserData('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
+    .then((user) => {
+      console.log('Loaded');
+      if(mounted) {
+        this.setState({ user, loadedUser: true });
+      }
+    })
+    .catch((error) => {
+      console.error('login error', error);
+    });
+  }
+
+  componentWillUnmount() {
+    mounted = false;
+  }
+
+  verifyAmount(amount) {
+    let inputText = amount;
+    if(amount > this.state.user.appData.maxAllowedWithdrawal) {
+      inputText = this.state.user.appData.maxAllowedWithdrawal;
+    }
+    inputText = inputText.toString();
+    this.setState({ inputText });
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.firstRow}>
-          <Text style={{ fontSize: Constants.realHeight / 25 }}>Welcome to</Text>
-          <Text style={{ fontSize: Constants.realHeight / 20 }}>humanATM app</Text>
-        </View>
-        <View style={styles.secondRow}>
-          <View style={styles.input}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Input the amount"
-              keyboardType="numeric"
-              autoCorrect={false}
-              value={this.props.inputText}
-              onChangeText={(inputText) => this.setState({inputText})}
-            />
-          </View>
-        </View>
-        <View style={styles.thirdRow}>
-          <View style={styles.input}>
-            <TouchableNativeFeedback>
-              <View style={styles.buttonInput}>
-                <Text>
-                  Request
-                </Text>
+        {this.state.loadedUser ? (
+          <View>
+            <View style={styles.firstRow}>
+              <Image
+                style={{
+                  flex: 1,
+                  resizeMode: 'contain',
+                }}
+                source={require('../images/HUMAN_ATMalta.png')}
+              />
+            </View>
+            <View style={styles.secondRow}>
+              <View style={styles.input}>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Input the amount"
+                  keyboardType="numeric"
+                  autoCorrect={false}
+                  value={this.state.inputText}
+                  onChangeText={(input) => this.verifyAmount(input)}
+                />
               </View>
-            </TouchableNativeFeedback>
+            </View>
+            <View style={styles.thirdRow}>
+              <View style={styles.input}>
+                <Button success={true} style={styles.buttonInput}>
+                  <Text>
+                    Request
+                  </Text>
+                </Button>
+              </View>
+            </View>
           </View>
-        </View>
+        ) : (
+          <Loading />
+        )}
       </View>
     );
   }
@@ -93,6 +140,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonInput: {
+    width: Constants.realWidth * (9 / 10),
     height: Constants.realHeight / 12,
     justifyContent: 'center',
     alignItems: 'center',
