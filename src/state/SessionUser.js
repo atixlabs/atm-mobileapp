@@ -44,6 +44,7 @@ const SessionUser = {
         publicKey: { value: userInfo.publicKey },
         address: { value: userInfo.address }
       });
+      return this.user;
     } catch (error) {
       console.log('[SessionUser.loadUser] User in session cannot be loaded:', error);
       throw error;

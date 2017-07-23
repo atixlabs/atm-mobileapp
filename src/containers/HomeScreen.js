@@ -18,7 +18,7 @@ import List from './List';
 
 import Constants from '../components/Constants';
 
-const applicationAsyncInit = async function(cb) {
+const applicationAsyncInit = async function() {
   try {
     const user = await SessionUser.loadUser();
     let userData
@@ -31,7 +31,6 @@ const applicationAsyncInit = async function(cb) {
       await API.user.getUserData(user.address);
     }
     console.log("Loaded User", SessionUser.getUser())
-    cb();
   } catch(error) {
     console.log("[App.onApplicationInit] cannot create a new user", error);
   }
@@ -51,7 +50,7 @@ export default class HomeScreen extends React.Component {
   }
 
   componentWillMount() {
-    applicationAsyncInit(() => this.setState({userLoaded: true}));
+    applicationAsyncInit().then(() => this.setState({userLoaded: true}));
   }
 
   render() {
