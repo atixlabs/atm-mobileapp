@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import Loading from '../components/Loading';
 import API from '../services/API/API';
-
+import SessionUser from '../state/SessionUser';
 import Constants from '../components/Constants';
 
 let mounted;
@@ -31,9 +31,10 @@ export default class MoneyRequestScreen extends React.Component {
   componentDidMount() {
     mounted = true;
     console.log('Loading');
-    API.user.getUserData('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
+    const user = SessionUser.getUser();
+    API.user.getUserData(user.address)
     .then((user) => {
-      console.log('Loaded');
+      console.log('Loaded user', user);
       if(mounted) {
         this.setState({ user, loadedUser: true });
       }
@@ -57,7 +58,7 @@ export default class MoneyRequestScreen extends React.Component {
   }
 
   onPress(amount) {
-    API.user.postNewRequest('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr', this.state.inputText)
+    API.user.postNewRequest(this.state.user.address, this.state.inputText)
     .then((resp) => {
       console.log('resp', resp);
       this.setState({

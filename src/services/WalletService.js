@@ -24,14 +24,6 @@ WalletService.generateNewWallet = () => {
     publicKey: publicKey,
     address: address
   }
-  // Wallet hardcoded 
-  /*const address = util.bufferToHex(util.publicToAddress('0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b'));
-  return {
-    mnemonic: "corn buzz endorse wagon pitch seek shield tongue kind measure fun use",
-    privateKey: "0x424525f3f6def569df3d97b0d06238e776f2670c853f32c5c029c1622403b8f2",
-    publicKey: "0x9fc28d4cf6dcfd9221b291129689ab75edba1a92819de74521a9af8a92c4f952206797c1a9444fec636bc43384804a768f8e50a060b9cae5195bacdba0ef500b",
-    address: address
-  }*/
 };
 
 WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
@@ -57,23 +49,3 @@ WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
 };
 
 export default WalletService;
-
-/*
-  // Naranja usefull code ?)
-  self.pushContractTransaction = function(_keys, transaction) {
-    $log.info("[backend - pushContractTransaction] Starting", "transaction[" + angular.toJson(transaction) + ']');
-    return self.signHash(transaction.info.to_sign, _keys.privkey)
-    .then(function (signature) {
-      $log.info("[backend - pushContractTransaction] Info", "Calling apiCall(/push_tx)");
-      transaction.signature = signature.signature;
-      return self.apiCall(_keys, ENVIRONMENT.apiurl('/push_tx'), angular.toJson(transaction));
-    });
-  }
-  self.callContractFunction = function(_keys, token_id, fnc, payload) {
-    $log.info("[backend - callContractFunction] Starting", "function[" + fnc + "]" , "payload[" + angular.toJson(payload) + ']');
-    return self.apiCall(_keys, ENVIRONMENT.apiurl('/token/' + token_id + '/' + fnc), payload)
-    .then(function(transaction) {
-      return self.pushContractTransaction(_keys, transaction);
-    });
-  }
-*/

@@ -18,25 +18,20 @@ import List from './List';
 
 import Constants from '../components/Constants';
 
-const sendDeviceId = function(userData) {
-  console.log('sendDeviceIdkdljaskldjaskldjasklajdkl');
-  API.oneSignal.sendDeviceId(userData)
-  .then((response) => {
-    console.log('Device id saved', response);
-  })
-  .catch((error) => {
-    console.log('Device id error', error);
-  });
-};
-
 const applicationAsyncInit = async function(cb) {
   try {
     const user = await SessionUser.loadUser();
+    let userData
     if(!user) {
       console.log("Creating user")
       const wallet = WalletService.generateNewWallet();
       await SessionUser.saveUser(wallet);
+      userData = await API.user.register('username', 'password', wallet.address,  wallet.address)
+    } else {
+      await API.user.getUserData(user.address);
     }
+
+    await API.oneSignal.sendDeviceId(userData);
     console.log("Loaded User", SessionUser.getUser())
     cb();
   } catch(error) {
@@ -85,9 +80,6 @@ export default class HomeScreen extends React.Component {
         </Container>
        )
     }
-
-
-    
   }
 }
 
