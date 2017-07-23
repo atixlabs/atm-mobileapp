@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   AsyncStorage,
+  Image,
   TouchableNativeFeedback,
 } from 'react-native';
 import { Container, Content, Spinner } from 'native-base';
@@ -70,11 +71,21 @@ export default class HomeScreen extends React.Component {
       );
     } else {
        return (
-        <Container>
-          <Content>
+        <View style={styles.container}>
+          <View style={styles.firstRow} />
+          <View style={styles.secondRow}>
+            <Image
+              style={{
+                resizeMode: 'contain',
+                width: Constants.realWidth * (9 / 10)
+              }}
+              source={require('../images/humanATM_png.png')}
+            />
+          </View>
+          <View style={styles.thirdRow}>
             <Spinner />
-          </Content>
-        </Container>
+          </View>
+        </View>
        )
     }
   }
@@ -83,5 +94,26 @@ export default class HomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: Constants.realWidth,
+    height: Constants.realHeight,
+    alignContent: 'center',
+  },
+  firstRow: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
+  },
+  secondRow: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
+  },
+  thirdRow: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: (Constants.realHeight - Constants.tabviewHeight) / 3
   },
 });

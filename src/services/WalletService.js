@@ -28,7 +28,7 @@ WalletService.generateNewWallet = () => {
 
 WalletService.send = ({privateKey, fromAddress}, toAddress, amount) => {
   const buildTxPayload = {from: fromAddress, to: toAddress, amount: amount};
-  API.contract.buildTransferTx(buildTxPayload)
+  return API.contract.buildTransferTx(buildTxPayload)
   .then((response) => response.json())
   .then(({raw_tx}) => {
     console.log("[WalletService.send] raw_tx", raw_tx);

@@ -15,6 +15,7 @@ import Constants from '../components/Constants';
 import SessionUser from '../state/SessionUser';
 
 let mounted;
+let user;
 
 export default class List extends React.Component {
 
@@ -28,10 +29,11 @@ export default class List extends React.Component {
 	componentDidMount() {
     mounted = true;
 
-		const user = SessionUser.getUser();
+		user = SessionUser.getUser();
     API.user.getUserRequests(user.address)
 		.then((requests) => {
-      console.log('Loaded');
+			console.log('LIST');
+      console.log('Loaded', requests);
       if(mounted) {
         this.setState({ requests, loadedUser: true });
       }
@@ -54,15 +56,14 @@ export default class List extends React.Component {
 	}
 
 	goToContactInfo(item) {
-		console.log(item);
 		this.props.navigation.navigate('SendScreen', {
 			toUser: {
-				name:'sds', 
-				address:'0x223',
+				name: item.retailUser.personalInformation.fullName, 
+				address: item.retailUser.address,
 			},
 			fromWallet: {
-				privateKey: '0x3424',
-				address: '0x456',
+				privateKey: user.privateKey,
+				address: user.address,
 			},
 			amount: item.requestedAmount,
 		});
@@ -73,18 +74,17 @@ export default class List extends React.Component {
 	}
 
 	render () {
-		console.log(this.state.requests)
 		return (
 			<FlatList data={this.state.requests} keyExtractor={this.keyExtractor} ItemSeparatorComponent={this.renderSeparator}
 				renderItem={({item}) =>
 					<View style={styles.list} key={item._id}>
 						<Text style={styles.listItem}>$ {item.requestedAmount} - {item.state}</Text>
 						<View style={{flex: 1}}/>
-						<View style={{flexDirection: 'row'}}>
+						<View key={item._id} style={{flexDirection: 'row'}}>
 							<Button style={styles.listButton} small success={true} onPress={() => this.goToContactInfo(item)}>
 								<Icon name='list'/>
 							</Button>
-							<Button style={styles.listButton} small backgroundColor="#c44b4b" onPress={this.cancelTransaction}>
+							<Button key={item._id} style={styles.listButton} small backgroundColor="#c44b4b" onPress={this.cancelTransaction}>
 								<Icon name='close'/>
 							</Button>
 						</View>

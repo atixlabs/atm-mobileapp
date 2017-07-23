@@ -13,6 +13,7 @@ import {
 import Loading from '../components/Loading';
 import API from '../services/API/API';
 import SessionUser from '../state/SessionUser';
+
 import Constants from '../components/Constants';
 
 let mounted;
@@ -34,7 +35,7 @@ export default class MoneyRequestScreen extends React.Component {
     const user = SessionUser.getUser();
     API.user.getUserData(user.address)
     .then((user) => {
-      console.log('Loaded user', user);
+      console.log('Loaded', user.address);
       if(mounted) {
         this.setState({ user, loadedUser: true });
       }
@@ -58,7 +59,8 @@ export default class MoneyRequestScreen extends React.Component {
   }
 
   onPress(amount) {
-    API.user.postNewRequest(this.state.user.address, this.state.inputText)
+    const user = SessionUser.getUser();
+    API.user.postNewRequest(user.address, this.state.inputText)
     .then((resp) => {
       console.log('resp', resp);
       this.setState({

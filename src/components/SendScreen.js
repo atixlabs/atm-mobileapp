@@ -1,6 +1,7 @@
 import React from 'react';
 import {
-	StyleSheet,
+  StyleSheet,
+  Alert,
 } from 'react-native';
 import { 
   Container,
@@ -24,15 +25,27 @@ const SendScreen = (props) => {
   const amount = props.navigation.state.params.amount;
 
   const onConfirm = () => {
-    // TODO: call a popup confirmation
-    WalletService.send({privateKey: fromWallet.privateKey, fromAddress: fromWallet.address}, toUser.address, amount)
-    .then(function(result) {
-      props.navigation.navigate('HomeScreen');
-    })
-    .catch(function(error){
-      console.log('[SendScreen.onConfirm] error', error);
-      // TODO: show notification
-    }) 
+    Alert.alert(
+      'Transaction confirmation',
+      'Do you want to confirm the transaction?',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => {
+          console.log('toUser: ', toUser);
+          console.log('fromWallet: ', fromWallet);
+          console.log('amount: ', amount);
+          WalletService.send({privateKey: fromWallet.privateKey, fromAddress: fromWallet.address}, toUser.address, amount)
+          .then(function(result) {
+            props.navigation.navigate('HomeScreen');
+          })
+          .catch(function(error){
+            console.log('[SendScreen.onConfirm] error', error);
+            // TODO: show notification
+          });
+        }},
+      ],
+      { cancelable: false }
+    )
   };
 
   return (
