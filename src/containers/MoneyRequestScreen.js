@@ -31,7 +31,6 @@ export default class MoneyRequestScreen extends React.Component {
 
   componentDidMount() {
     mounted = true;
-    console.log('Loading');
     const user = SessionUser.getUser();
     API.user.getUserData(user.address)
     .then((user) => {

@@ -29,7 +29,7 @@ const applicationAsyncInit = async function() {
       await SessionUser.saveUser(wallet);
       userData = await API.user.register('username', 'password', wallet.address,  wallet.address)
     } else {
-      await API.user.getUserData(user.address);
+      userData = await API.user.getUserData(user.address);
     }
     console.log("Loaded User", SessionUser.getUser())
   } catch(error) {
