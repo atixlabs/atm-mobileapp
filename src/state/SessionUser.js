@@ -37,12 +37,14 @@ const SessionUser = {
     try {
       const userInfoSerialized = await AsyncStorage.getItem(USER_LOGGED_IN);
       const userInfo = JSON.parse(userInfoSerialized);
-      return this.user = Object.create(User.prototype, {
+      if(!userInfo) return;
+      this.user = Object.create(User.prototype, {
         mnemonic: { value: userInfo.mnemonic },
         privateKey: { value: userInfo.privateKey },
         publicKey: { value: userInfo.publicKey },
         address: { value: userInfo.address }
       });
+      console.log(">>>>>>>>>", this);
     } catch (error) {
       console.log('[SessionUser.loadUser] User in session cannot be loaded:', error);
       throw error;

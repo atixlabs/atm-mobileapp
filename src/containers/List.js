@@ -12,6 +12,7 @@ import {
 } from 'native-base';
 import API from '../services/API/API';
 import Constants from '../components/Constants';
+import SessionUser from '../state/SessionUser';
 
 let mounted;
 
@@ -26,9 +27,10 @@ export default class List extends React.Component {
 
 	componentDidMount() {
     mounted = true;
-    console.log('Loading');
-    API.user.getUserRequests('n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
-    .then((requests) => {
+
+		const user = SessionUser.getUser();
+    API.user.getUserRequests(user.address)
+		.then((requests) => {
       console.log('Loaded');
       if(mounted) {
         this.setState({ requests, loadedUser: true });

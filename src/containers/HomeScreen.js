@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   TouchableNativeFeedback,
 } from 'react-native';
+import { Container, Content, Spinner } from 'native-base';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import OneSignal from 'react-native-onesignal';
 import API from '../services/API/API';
@@ -28,26 +29,65 @@ const sendDeviceId = function(userData) {
   });
 };
 
+const applicationAsyncInit = async function(cb) {
+  try {
+    const user = await SessionUser.loadUser();
+    if(!user) {
+      console.log("Creating user")
+      const wallet = WalletService.generateNewWallet();
+      await SessionUser.saveUser(wallet);
+    }
+    console.log("Loaded User", SessionUser.getUser())
+    cb();
+  } catch(error) {
+    console.log("[App.onApplicationInit] cannot create a new user", error);
+  }
+};
+
 export default class HomeScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      userLoaded: false
+    }
+  }
 
   static navigationOptions = {
     header: null,
   }
 
+  componentWillMount() {
+    applicationAsyncInit(() => this.setState({userLoaded: true}));
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <ScrollableTabView
-          tabBarActiveTextColor='#ffc211'
-          tabBarUnderlineStyle={{ backgroundColor: '#ffc211'}}
-          renderTabBar={() => <DefaultTabBar />}
-          tabBarPosition='bottom'
-        >
-          <MoneyRequestScreen tabLabel="Request" />
-          <List navigation={this.props.navigation} tabLabel="List"/>
-        </ScrollableTabView>
-      </View>
-    );
+    if(this.state.userLoaded) {
+      return (
+        <View style={styles.container}>
+          <ScrollableTabView
+            tabBarActiveTextColor='#ffc211'
+            tabBarUnderlineStyle={{ backgroundColor: '#ffc211'}}
+            renderTabBar={() => <DefaultTabBar />}
+            tabBarPosition='bottom'
+          >
+            <MoneyRequestScreen tabLabel="Request" />
+            <List navigation={this.props.navigation} tabLabel="List"/>
+          </ScrollableTabView>
+        </View>
+      );
+    } else {
+       return (
+        <Container>
+          <Content>
+            <Spinner />
+          </Content>
+        </Container>
+       )
+    }
+
+
+    
   }
 }
 
