@@ -30,8 +30,6 @@ const applicationAsyncInit = async function(cb) {
     } else {
       await API.user.getUserData(user.address);
     }
-
-    await API.oneSignal.sendDeviceId(userData);
     console.log("Loaded User", SessionUser.getUser())
     cb();
   } catch(error) {
