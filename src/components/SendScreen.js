@@ -1,5 +1,7 @@
 import React from 'react';
-
+import {
+	StyleSheet,
+} from 'react-native';
 import { 
   Container,
   Content,
@@ -10,8 +12,9 @@ import {
   Button,
   Item,
   ListItem,
-  Icon
+  Icon,
 } from 'native-base';
+import Constants from './Constants';
 
 import WalletService from '../services/WalletService';
 
@@ -51,7 +54,7 @@ const SendScreen = (props) => {
                 <ListItem>
                   <Icon name='md-cash' />
                 </ListItem>
-                <Text>{amount}</Text>
+                <Text>$ {amount}</Text>
               </Item>
               <Item>
                 <ListItem>
@@ -62,7 +65,7 @@ const SendScreen = (props) => {
             </Body>
           </CardItem>
           <CardItem footer>
-            <Button onPress={onConfirm}>
+            <Button onPress={onConfirm} style={styles.button}>
               <Text>Confirm</Text>
             </Button>
           </CardItem>
@@ -75,5 +78,19 @@ const SendScreen = (props) => {
 SendScreen.navigationOptions = {
   title: 'Exchange',
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  button: {
+    width: Constants.realWidth * (9 / 10),
+    height: Constants.realHeight / 12,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
 
 export default SendScreen;
