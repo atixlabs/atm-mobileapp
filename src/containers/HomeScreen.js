@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   TextInput,
+  AsyncStorage,
   TouchableNativeFeedback,
 } from 'react-native';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
@@ -18,6 +19,22 @@ export default class HomeScreen extends React.Component {
     header: null,
   }
 
+  componentWillMount() {
+    AsyncStorage.getItem('userId')
+    .then((userId) => {
+      this.state({ userId });
+    })
+    .catch(() => {
+      AsyncStorage.setItem('userId', 'n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
+      .then(() => {
+        this.state({ userId: 'n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr' });
+      })
+      .catch((error) => {
+        console.error('login error', error);
+      });
+    });
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -27,7 +44,7 @@ export default class HomeScreen extends React.Component {
           renderTabBar={() => <DefaultTabBar />}
           tabBarPosition='bottom'
         >
-          <MoneyRequestScreen tabLabel="Request" />
+          <MoneyRequestScreen userId={this.state.userId} tabLabel="Request" />
           <List navigation={this.props.navigation} tabLabel="List"/>
         </ScrollableTabView>
       </View>
