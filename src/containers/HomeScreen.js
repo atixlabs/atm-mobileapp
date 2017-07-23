@@ -34,65 +34,6 @@ export default class HomeScreen extends React.Component {
     header: null,
   }
 
-<<<<<<< HEAD
-  componentWillMount() {
-    AsyncStorage.getItem('userId')
-    .then((userId) => {
-      this.state({ userId });
-    })
-    .catch(() => {
-      AsyncStorage.setItem('userId', 'n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr')
-      .then(() => {
-        this.state({ userId: 'n2eMqTT929pb1RDNuqEnxdaLau1rxy3efr' });
-      })
-      .catch((error) => {
-        console.error('login error', error);
-=======
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {},
-      loadedUser: false,
-    }
-  }
-
-  componentWillMount() {
-    OneSignal.addEventListener('ids', this.onIds);
-  }
-
-  componentWillUnmount() {
-    OneSignal.removeEventListener('ids', this.onIds);
-  }
-
-  onIds(device) {
-    console.log('Device info: ', device);
-    SessionUser.loadUser().then((loadedUser) => {
-      if (loadedUser) {
-        sendDeviceId({
-          address: loadedUser.address,
-          deviceId: device.userId,
-          username: 'atix',
-          password: 'atixlabs'
-        });
-      }
-    }).catch((error) => {
-      console.log('loadUser error', error);
-      const wallet = WalletService.generateNewWallet();
-      SessionUser.saveUser(wallet).then((savedUser) => {
-        sendDeviceId({
-          address: savedUser.address,
-          deviceId: device.userId,
-          username: 'atix',
-          password: 'atixlabs'
-        });
-      })
-      .catch((error) => {
-        console.log('SessionUser.savedUser', error);
->>>>>>> e6e475fb8a0ff0f2c12ec5c4b0f1cdb0abae519b
-      });
-    });
-  }
-
   render() {
     return (
       <View style={styles.container}>
@@ -102,7 +43,7 @@ export default class HomeScreen extends React.Component {
           renderTabBar={() => <DefaultTabBar />}
           tabBarPosition='bottom'
         >
-          <MoneyRequestScreen userId={this.state.userId} tabLabel="Request" />
+          <MoneyRequestScreen tabLabel="Request" />
           <List navigation={this.props.navigation} tabLabel="List"/>
         </ScrollableTabView>
       </View>
